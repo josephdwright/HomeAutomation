@@ -38,14 +38,14 @@ public class MediaArchiveService {
                             String.format(template, name));
     }
     
-    @RequestMapping("/archivePhotos")
+    @RequestMapping("/archiveMedia")
     public MediaArchiveServiceController printName(@RequestParam(value="sourcePath", required = true) String sourcePath, 
     		@RequestParam(value="targetPath", required = true) String targetPath,
-    		@RequestParam(value="isArchiveMediaVideos", required = true) boolean isArchiveMediaVideos) throws IOException, ParseException {
+    		@RequestParam(value="isMediaVideos", required = true) boolean isMediaVideos) throws IOException, ParseException {
        MediaArchiveServiceUtility util = new MediaArchiveServiceUtility();
     ;
        return new MediaArchiveServiceController(counter.incrementAndGet(),
-                            String.format(template, util.archiveMedia(sourcePath, targetPath, isArchiveMediaVideos)));
+                            String.format(template, util.archiveMedia(sourcePath, targetPath, isMediaVideos)));
     }
    
 }

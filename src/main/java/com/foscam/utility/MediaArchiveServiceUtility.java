@@ -30,15 +30,12 @@ public class MediaArchiveServiceUtility {
 
 	private static final Logger log = LoggerFactory.getLogger(MediaArchiveServiceUtility.class);
 	
-	public String archiveMedia(String sourcePath, String targetPath, boolean isArchiveMediaVideos) throws IOException, ParseException {
+	public String archiveMedia(String sourcePath, String targetPath, boolean isMediaVideos) throws IOException, ParseException {
 		
-		//C:/Users/Joseph/Pictures/FoscamOps/FI9816P_00626E62640A/snap/
 		File srcFolder = new File(sourcePath);
 		File[] srcListOfFiles = srcFolder.listFiles();
-		//"Z:/FoscamArchive/"
-	    File tgtFolder = new File(targetPath);
-	    File[] tgtListOfFiles = tgtFolder.listFiles();
-
+		File tgtFolder = new File(targetPath);
+	    
 	    log.info("Source Path Directory is [" + srcFolder.getPath() + "]");
 	    log.info("Target Path Directory is [" + tgtFolder.getPath() + "]");
 	    log.info("# of identified files on source folder are [" + srcListOfFiles.length + "]");
@@ -56,15 +53,15 @@ public class MediaArchiveServiceUtility {
 	    	returnObjBuilder = returnObjBuilder + getYearString + "-" + getMonthString + "-" + getDayString + "; ";	
 	    }
 	    
-	    archiveFiles(sourcePath, srcListOfFiles, targetPath, isArchiveMediaVideos, true);
+	    archiveFiles(sourcePath, srcListOfFiles, targetPath, isMediaVideos, true);
 		
 		return returnObjBuilder;
 		
 	}
 	
-	public boolean archiveFiles(String sourcePath, File[] filesToArchive, String targetPath, boolean archiveMediaIsVideos, boolean removeAfterArchiving) throws IOException, ParseException {
+	public boolean archiveFiles(String sourcePath, File[] filesToArchive, String targetPath, boolean isMediaVideos, boolean removeAfterArchiving) throws IOException, ParseException {
 		
-		SimpleDateFormat sdf_IncomingDate_MM_DD_YYYY = archiveMediaIsVideos ? new SimpleDateFormat("yyyyMMdd_HHmmss") : new SimpleDateFormat("yyyyMMdd-HHmmss");
+		SimpleDateFormat sdf_IncomingDate_MM_DD_YYYY = isMediaVideos ? new SimpleDateFormat("yyyyMMdd_HHmmss") : new SimpleDateFormat("yyyyMMdd-HHmmss");
 		SimpleDateFormat sdf_OutgoingDateFolderDirectoryYYYYMMDD = new SimpleDateFormat("yyyy/MM/dd/HH");
 
 		String srcFileName = "";
