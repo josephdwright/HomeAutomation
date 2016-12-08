@@ -29,36 +29,7 @@ import org.springframework.util.FileCopyUtils;
 public class MediaArchiveServiceUtility {
 
 	private static final Logger log = LoggerFactory.getLogger(MediaArchiveServiceUtility.class);
-	
-	public String archiveMedia(String sourcePath, String targetPath, boolean isVideoMedia) throws IOException, ParseException {
 		
-		File srcFolder = new File(sourcePath);
-		File[] srcListOfFiles = srcFolder.listFiles();
-		File tgtFolder = new File(targetPath);
-	    
-	    log.info("Source Path Directory is [" + srcFolder.getPath() + "]");
-	    log.info("Target Path Directory is [" + tgtFolder.getPath() + "]");
-	    log.info("# of identified files on source folder are [" + srcListOfFiles.length + "]");
-	    int fileCounter = 0;
-	    
-	    String returnObjBuilder = "";
-	    
-	    for(File file : srcListOfFiles) {
-	    	fileCounter++;
-	    	log.info("File # [" + fileCounter + "] " + file.getName());
-	    	String getDateString = file.getName().substring(8,16);
-	    	String getYearString = getDateString.substring(0, 4);
-	    	String getMonthString = getDateString.substring(4,6);
-	    	String getDayString = getDateString.substring(6,8);
-	    	returnObjBuilder = returnObjBuilder + getYearString + "-" + getMonthString + "-" + getDayString + "; ";	
-	    }
-	    
-	    archiveFiles(sourcePath, srcListOfFiles, targetPath, isVideoMedia, true);
-		
-		return returnObjBuilder;
-		
-	}
-	
 	public boolean archiveFiles(String sourcePath, File[] filesToArchive, String targetPath, boolean isVideoMedia, boolean removeAfterArchiving) throws IOException, ParseException {
 		
 		SimpleDateFormat sdf_IncomingDate_MM_DD_YYYY = isVideoMedia ? new SimpleDateFormat("yyyyMMdd_HHmmss") : new SimpleDateFormat("yyyyMMdd-HHmmss");
@@ -101,10 +72,6 @@ public class MediaArchiveServiceUtility {
 		}
 
 		return true;
-	}
-	
-	public boolean compressArchiveMedia() {
-		return false;
 	}
 	
 }
