@@ -30,7 +30,7 @@ public class MediaArchiveServiceUtility {
 
 	private static final Logger log = LoggerFactory.getLogger(MediaArchiveServiceUtility.class);
 	
-	public String archiveMedia(String sourcePath, String targetPath, boolean isMediaVideos) throws IOException, ParseException {
+	public String archiveMedia(String sourcePath, String targetPath, boolean isVideoMedia) throws IOException, ParseException {
 		
 		File srcFolder = new File(sourcePath);
 		File[] srcListOfFiles = srcFolder.listFiles();
@@ -53,15 +53,15 @@ public class MediaArchiveServiceUtility {
 	    	returnObjBuilder = returnObjBuilder + getYearString + "-" + getMonthString + "-" + getDayString + "; ";	
 	    }
 	    
-	    archiveFiles(sourcePath, srcListOfFiles, targetPath, isMediaVideos, true);
+	    archiveFiles(sourcePath, srcListOfFiles, targetPath, isVideoMedia, true);
 		
 		return returnObjBuilder;
 		
 	}
 	
-	public boolean archiveFiles(String sourcePath, File[] filesToArchive, String targetPath, boolean isMediaVideos, boolean removeAfterArchiving) throws IOException, ParseException {
+	public boolean archiveFiles(String sourcePath, File[] filesToArchive, String targetPath, boolean isVideoMedia, boolean removeAfterArchiving) throws IOException, ParseException {
 		
-		SimpleDateFormat sdf_IncomingDate_MM_DD_YYYY = isMediaVideos ? new SimpleDateFormat("yyyyMMdd_HHmmss") : new SimpleDateFormat("yyyyMMdd-HHmmss");
+		SimpleDateFormat sdf_IncomingDate_MM_DD_YYYY = isVideoMedia ? new SimpleDateFormat("yyyyMMdd_HHmmss") : new SimpleDateFormat("yyyyMMdd-HHmmss");
 		SimpleDateFormat sdf_OutgoingDateFolderDirectoryYYYYMMDD = new SimpleDateFormat("yyyy/MM/dd/HH");
 
 		String srcFileName = "";

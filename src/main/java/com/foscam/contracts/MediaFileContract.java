@@ -15,7 +15,7 @@ package com.foscam.contracts;
  * 
  * </p>
  */
-public class FileMappingContract {
+public class MediaFileContract {
 
 	private String sourcePath = null; // "c:/users/joseph/pictures/foscamops/"
 	private String targetPath = null; // "z:/foscamarchive/"

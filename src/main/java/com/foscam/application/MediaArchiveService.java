@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.foscam.contracts.MediaArchiveServiceResponseTemplate;
 import com.foscam.utility.MediaArchiveServiceUtility;
 
 /**
@@ -29,23 +30,17 @@ import com.foscam.utility.MediaArchiveServiceUtility;
 @RestController
 public class MediaArchiveService {
 
-    private static final String template = "Hello, %s!";
-    private final AtomicLong counter = new AtomicLong();
-
-    @RequestMapping("/archiveVideos")
-    public MediaArchiveServiceController greeting(@RequestParam(value="name", defaultValue="World") String name) {
-        return new MediaArchiveServiceController(counter.incrementAndGet(),
-                            String.format(template, name));
-    }
+	private final AtomicLong counter = new AtomicLong();
+	private static final String template = "Media Archive Request [%s]";
     
     @RequestMapping("/archiveMedia")
-    public MediaArchiveServiceController printName(@RequestParam(value="sourcePath", required = true) String sourcePath, 
+    public MediaArchiveServiceResponseTemplate archiveMedia(@RequestParam(value="sourcePath", required = true) String sourcePath, 
     		@RequestParam(value="targetPath", required = true) String targetPath,
-    		@RequestParam(value="isMediaVideos", required = true) boolean isMediaVideos) throws IOException, ParseException {
-       MediaArchiveServiceUtility util = new MediaArchiveServiceUtility();
-    ;
-       return new MediaArchiveServiceController(counter.incrementAndGet(),
-                            String.format(template, util.archiveMedia(sourcePath, targetPath, isMediaVideos)));
+    		@RequestParam(value="isVideoMedia", required = true) boolean isVideoMedia) throws IOException, ParseException {
+       
+    	MediaArchiveServiceController controller = new MediaArchiveServiceController();
+    	
+    return new MediaArchiveServiceResponseTemplate(counter.incrementAndGet(), 
+    		   String.format(template, controller.archiveMedia(sourcePath, targetPath, isVideoMedia)));
     }
-   
 }
