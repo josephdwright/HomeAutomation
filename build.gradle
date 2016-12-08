@@ -13,7 +13,7 @@ apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
 
 jar {
-    baseName = 'gs-rest-service'
+    baseName = 'foscam-media-utility'
     version =  '0.1.0'
 }
 
