@@ -7,7 +7,7 @@ import java.text.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.foscam.utility.MediaArchiveServiceUtility;
+import com.foscam.utility.FileUtility;
 
 /**
  * 
@@ -28,7 +28,7 @@ import com.foscam.utility.MediaArchiveServiceUtility;
 public class MediaArchiveServiceController {
 
 	private static final Logger log = LoggerFactory.getLogger(MediaArchiveServiceController.class);
-	private static final MediaArchiveServiceUtility util = new MediaArchiveServiceUtility();
+	private static final FileUtility util = new FileUtility();
 
 	public String archiveMedia(String sourcePath, String targetPath, boolean isVideoMedia) throws IOException, ParseException {
 		
@@ -39,19 +39,12 @@ public class MediaArchiveServiceController {
 	    log.info("Source Path Directory is [" + srcFolder.getPath() + "]");
 	    log.info("Target Path Directory is [" + tgtFolder.getPath() + "]");
 	    log.info("# of identified files on source folder are [" + srcListOfFiles.length + "]");
-	    int fileCounter = 0;
 	    
 	    String returnObjBuilder = "";
 	    
-	    for(File file : srcListOfFiles) {
-	    	fileCounter++;
-	    	log.info("File # [" + fileCounter + "] " + file.getName());
-	    	String getDateString = file.getName().substring(8,16);
-	    	String getYearString = getDateString.substring(0, 4);
-	    	String getMonthString = getDateString.substring(4,6);
-	    	String getDayString = getDateString.substring(6,8);
-	    	returnObjBuilder = returnObjBuilder + getYearString + "-" + getMonthString + "-" + getDayString + "; ";	
-	    }
+	    returnObjBuilder = "Source Path Directory is '" + srcFolder.getPath() + "' - " 
+	    					+ "Target Path Directory is '" + tgtFolder.getPath() + "' -"
+	    					+ "# of identified files on source folder are '" + srcListOfFiles.length + "' ";
 	    
 	    util.archiveFiles(sourcePath, srcListOfFiles, targetPath, isVideoMedia, true);
 		
