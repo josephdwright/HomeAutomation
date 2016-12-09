@@ -54,9 +54,6 @@ public class FileUtility {
 				sourcePathNameStr = sourcePathStr + srcFileName;
 				targetPathNameStr = targetPathStr + dateSubFolderStructure + "/" + srcFileName;
 				
-				log.info("Building Source Path [" + sourcePathNameStr + "]");
-				log.info("Building Target Path [" + targetPathNameStr + "]");
-				
 				File sourcePathName =  new File(sourcePathNameStr);
 				File targetPathName =  new File(targetPathNameStr);
 				File targetPathNameDir =  new File(targetPathNameStr.substring(0, targetPathNameStr.lastIndexOf("/")));
